@@ -1,0 +1,146 @@
+<decllist> ::=
+	| <noreturnopt> <primtype> IDENT <funcorvardeclrest> <decllist>
+	| EOF
+	| enum { <enumlist> } ; <decllist>
+<noreturnopt> ::=
+	|
+	| noreturn
+<primtype> ::=
+	| char
+	| int
+	| void
+<funcorvardeclrest> ::=
+	| ( <paramlist> ) <semiorblock>
+	| <asgninitopt> ;
+	| [ <orexpr> ] ;
+<paramlist> ::=
+	|
+	| <param> <paramlistrest>
+<param> ::=
+	| <primtype> IDENT <arropt>
+<arropt> ::=
+	|
+	| [ ]
+<paramlistrest> ::=
+	|
+	| , <param> <paramlistrest>
+<semiorblock> ::=
+	| ;
+	| <block>
+<block> ::=
+	| { <stmtlist> }
+<stmtlist> ::=
+	|
+	| <stmt> <stmtlist>
+<stmt> ::=
+	| <exprstmt> ;
+	| <ifstmt>
+	| <vardecl> ;
+	| break ;
+	| continue ;
+	| for ( <exprstmtoptorvardecl> ; <orexpropt> ; <exprstmtopt> ) <block>
+	| return <orexpropt> ;
+<ifstmt> ::=
+	| if ( <orexpr> ) <block> <elsestmtopt>
+<elsestmtopt> ::=
+	|
+	| else <elsestmtrest>
+<elsestmtrest> ::=
+	| <block>
+	| <ifstmt>
+<exprstmt> ::=
+	| <orexpr> <exprstmtrest>
+<orexpr> ::=
+	| <andexpr> <orexprrest>
+<andexpr> ::=
+	| <relexpr> <andexprrest>
+<relexpr> ::=
+	| <addexpr> <relexprrest>
+<addexpr> ::=
+	| <mulexpr> <addexprrest>
+<mulexpr> ::=
+	| <unexpr> <mulexprrest>
+<unexpr> ::=
+	| <primexpr> <unexprrest>
+	| <unop> <unexpr>
+<primexpr> ::=
+	| ( <orexpr> )
+	| CHARCONST
+	| IDENT
+	| INTCONST
+	| STRLIT
+<unexprrest> ::=
+	|
+	| ( <arglist> ) <unexprrest>
+	| [ <orexpr> ] <unexprrest>
+<arglist> ::=
+	|
+	| <orexpr> <arglistrest>
+<arglistrest> ::=
+	|
+	| , <orexpr> <arglistrest>
+<mulexprrest> ::=
+	|
+	| <mulop> <mulexpr>
+<addexprrest> ::=
+	|
+	| <addop> <mulexpr> <addexprrest>
+<relexprrest> ::=
+	|
+	| <relop> <addexpr>
+<andexprrest> ::=
+	|
+	| && <relexpr> <andexprrest>
+<unop> ::=
+	| !
+	| +
+	| -
+<mulop> ::=
+	| %
+	| *
+	| /
+<addop> ::=
+	| +
+	| -
+<relop> ::=
+	| !=
+	| <
+	| <=
+	| ==
+	| >
+	| >=
+<orexprrest> ::=
+	|
+	| || <orexprrest>
+<exprstmtrest> ::=
+	|
+	| ++
+	| --
+	| <asgnop> <orexpr>
+<asgnop> ::=
+	| %=
+	| *=
+	| +=
+	| -=
+	| /=
+	| =
+<vardecl> ::=
+	| <primtype> IDENT <asgninitopt>
+<asgninitopt> ::=
+	|
+	| = <orexpr>
+<exprstmtoptorvardecl> ::=
+	| <exprstmtopt>
+	| <vardecl>
+<exprstmtopt> ::=
+	|
+	| <exprstmt>
+<orexpropt> ::=
+	|
+	| <orexpr>
+<enumlist> ::=
+	|
+	| IDENT <asgninitopt> <enumlistrest>
+<enumlistrest> ::=
+	|
+	| , <enumlist>

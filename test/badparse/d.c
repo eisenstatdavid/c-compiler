@@ -1,0 +1,3 @@
+noreturn void start() { for
+    ;
+}
